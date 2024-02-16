@@ -40,11 +40,16 @@ export async function POST(request) {
   }
   console.log("cmd: ", cmd);
   const python = spawn("python", cmd);
+  let message = "";
   python.stdout.on("data", function (response) {
-    console.log(response.toString());
+    let tmp = response.toString();
+    console.log(tmp);
+    message += tmp;
   });
   python.stderr.on("data", function (response) {
-    console.log(response.toString());
+    let tmp = response.toString();
+    console.log(tmp);
+    message += tmp;
   });
 
   python.on("exit", function (code) {
@@ -104,8 +109,8 @@ export async function POST(request) {
   }
 }
 
-function delay(milliseconds){
-  return new Promise(resolve => {
-      setTimeout(resolve, milliseconds);
+function delay(milliseconds) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, milliseconds);
   });
 }

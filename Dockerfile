@@ -4,12 +4,11 @@ WORKDIR /app
 COPY . ./
 
 RUN set -x && \
-    curl -sSl https://www.python.org/ftp/python/3.10.13/Python-3.10.13.tgz --output /tmp/Python-3.10.13.tgz && \
-    tar -xf /tmp/Python-3.10.13.tgz && \
-    cd Python-3.10.13 && ./configure --enable-optimizations && make altinstall && cd .. && rm -rf Python-3.10.13
+    tar -xf Python.tgz && \
+    cd Python && ./configure --enable-optimizations && make altinstall && cd .. && rm -rf Python
 
 RUN python3.10 init.py
-RUN npm run build
+RUN npm ci && npm run build
 
 
 USER root
