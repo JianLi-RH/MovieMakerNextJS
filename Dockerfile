@@ -5,7 +5,11 @@ COPY . ./
 
 RUN set -x && \
     tar -xf Python.tgz && \
-    cd Python && ./configure --enable-optimizations && make altinstall && cd .. && rm -rf Python
+    cd Python && ./configure --enable-optimizations && make altinstall && cd .. && rm -rf Python && \
+    apt-get install -y git && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/JianLi-RH/MovieMaker.git SourceCode/MovieMaker
 
 RUN python3.10 init.py
 RUN npm ci && npm run build
