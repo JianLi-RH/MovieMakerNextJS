@@ -4,8 +4,8 @@ WORKDIR /app
 COPY . ./
 
 RUN set -x && \
-    tar -xf Python.tgz && \
-    cd Python && ./configure --enable-optimizations && make altinstall && cd .. && rm -rf Python && \
+    tar -xf Python-3.10.13.tgz && \
+    cd Python-3.10.13 && ./configure --enable-optimizations && make altinstall && cd .. && rm -rf Python-3.10.13 && \
     apt-get install -y git && \
     rm -rf /var/lib/apt/lists/*
 
