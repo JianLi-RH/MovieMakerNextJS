@@ -5,6 +5,7 @@ COPY . ./
 
 RUN python3.10 init.py
 RUN npm run build
+VOLUME public/
 
 USER root
 
