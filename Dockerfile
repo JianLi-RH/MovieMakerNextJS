@@ -1,19 +1,11 @@
-FROM node:20 AS base
+FROM localhost:5000/backend:latest
 
 WORKDIR /app
 COPY . ./
 
-RUN set -x && \
-    tar -xf Python-3.10.13.tgz && \
-    cd Python-3.10.13 && ./configure --enable-optimizations && make altinstall && cd .. && rm -rf Python-3.10.13 && \
-    apt-get install -y git && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN git clone https://github.com/JianLi-RH/MovieMaker.git SourceCode/MovieMaker
-
 RUN python3.10 init.py
-RUN npm ci && npm run build
-
+RUN npm run build
+VOLUME public/
 
 USER root
 
